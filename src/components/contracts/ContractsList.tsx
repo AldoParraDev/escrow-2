@@ -192,6 +192,39 @@ export function ContractsList({ contracts }: ContractsListProps) {
               Contract #{contractSelected?.lease_id}
             </h2>
 
+            {isPaymentStatus && (
+              <div className="w-full p-4 border rounded-xl flex flex-col gap-3 bg-primary/5 border-primary/20">
+                <h3 className="flex items-center gap-2 text-lg font-medium text-primary">
+                  <FaMoneyBill className="size-5" />
+                  Payment Reference
+                </h3>
+                <p className="text-content text-sm">
+                  Reference Code
+                </p>
+                {isLoadingReference ? (
+                  <span className="text-content text-sm">Loading...</span>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      placeholder="e.g. ABC 123"
+                      value={paymentReferenceInput}
+                      onChange={(e) =>
+                        setPaymentReferenceInput(e.target.value)
+                      }
+                      className="w-full"
+                    />
+                    <Button
+                      onClick={handleSavePaymentReference}
+                      disabled={isSavingReference}
+                      className="w-full sm:w-auto"
+                    >
+                      {isSavingReference ? "Saving..." : "Save reference"}
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="w-full p-4 flex flex-col items-start gap-3 bg-white border rounded-xl">
               <h3
                 className={cn(
@@ -259,7 +292,9 @@ export function ContractsList({ contracts }: ContractsListProps) {
                     Status Description
                   </span>
                   <span className={cn("text-base")}>
-                    {contractSelected?.lease_status}
+                    {isPaymentStatus
+                      ? "Waiting for deposit payment"
+                      : contractSelected?.lease_status}
                   </span>
                 </div>
               </div>
@@ -281,39 +316,6 @@ export function ContractsList({ contracts }: ContractsListProps) {
                   </span>
                 </div>
               </div>
-
-              {isPaymentStatus && (
-                <div className="w-full p-4 border rounded-xl flex flex-col gap-3 bg-primary/5 border-primary/20">
-                  <h3 className="flex items-center gap-2 text-lg font-medium text-primary">
-                    <FaMoneyBill className="size-5" />
-                    Payment reference
-                  </h3>
-                  <p className="text-content text-sm">
-                    Add or edit the payment reference code.
-                  </p>
-                  {isLoadingReference ? (
-                    <span className="text-content text-sm">Loading...</span>
-                  ) : (
-                    <div className="flex flex-col gap-2">
-                      <Input
-                        placeholder="e.g. ABC 123"
-                        value={paymentReferenceInput}
-                        onChange={(e) =>
-                          setPaymentReferenceInput(e.target.value)
-                        }
-                        className="w-full"
-                      />
-                      <Button
-                        onClick={handleSavePaymentReference}
-                        disabled={isSavingReference}
-                        className="w-full sm:w-auto"
-                      >
-                        {isSavingReference ? "Saving..." : "Save reference"}
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
 
             <div className="w-full p-4 flex flex-col items-start gap-3 bg-white border rounded-xl">
