@@ -3,11 +3,14 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBuilding, FaFileAlt, FaHome, FaPhoneAlt } from "react-icons/fa";
+import { FaBuilding, FaFileAlt, FaHome, FaPhoneAlt, FaUniversity } from "react-icons/fa";
 import { HiCurrencyDollar } from "react-icons/hi2";
+import { useAuthStore } from "@/store/auth.store";
 
 export default function MenuDesktop() {
   const path = usePathname();
+  const { userLoggedIn } = useAuthStore();
+  const isAdmin = userLoggedIn?.user_role === "admin";
 
   return (
     <div className="hidden bg-white xl:flex items-center justify-around w-full">
@@ -54,6 +57,19 @@ export default function MenuDesktop() {
         <HiCurrencyDollar className="size-5" />
         <span className="text-base font-semibold leading-[1]">Escrow</span>
       </Link>
+
+      {isAdmin && (
+        <Link
+          href="/bank"
+          className={cn(
+            "flex items-center gap-2",
+            path === "/bank" ? "text-primary" : "text-content"
+          )}
+        >
+          <FaUniversity className="size-5" />
+          <span className="text-base font-semibold leading-[1]">Bank</span>
+        </Link>
+      )}
 
       <Link
         href="/contacts"
