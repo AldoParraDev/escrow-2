@@ -168,7 +168,7 @@ export const useNewContractStore = create<NewContractStore>((set, get) => ({
   propertyId: "",
   isRented: false,
   leaseStartDate: new Date(),
-  leaseEndDate: new Date(),
+  leaseEndDate: new Date(new Date().setMonth(new Date().getMonth() + 12)),
   leaseAgreementDueBy: new Date(),
   leasePreparedBy: "landlord",
   cooperatingBroker: "",

@@ -13,7 +13,7 @@ interface Props {
 export default function EscrowCard({ escrow, handleEscrowSelected }: Props) {
   return (
     <div
-      className="w-full border rounded-3xl bg-white p-3 flex flex-col gap-4 relative shadow-[24px_20px_135px_-31px_rgba(37,51,131,0.30)]"
+      className="w-full border rounded-xl bg-white p-3 flex flex-col gap-4 relative shadow-[24px_20px_135px_-31px_rgba(37,51,131,0.30)]"
       onClick={() => handleEscrowSelected(escrow)}
     >
       <div className="w-full flex items-center justify-start gap-4">

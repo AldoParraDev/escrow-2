@@ -4,10 +4,10 @@ const config: CapacitorConfig = {
   appId: "com.rentsafe.escrow",
   appName: "RentSafe",
   server: {
-    url: "https://escrow-3.vercel.app",
+    url: "https://escrow-frontend-eta.vercel.app",
   },
   android: {
-    // Configuración específica de Android
+    // Configuración específica de Android aquí
     allowMixedContent: true,
     webContentsDebuggingEnabled: true,
   },

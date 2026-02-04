@@ -137,7 +137,7 @@ export default function PropertiesNewPage() {
     });
   };
   return (
-    <div className="bg-[#F7F8FA] px-3 flex flex-col gap-4 pt-[30px] pb-[90px] sm:px-8 xl:pb-[40px] 2xl:px-[8rem]">
+    <div className="bg-[#F7F8FA] px-3 flex flex-col gap-4 pt-[20px] pb-[130px] sm:px-8 xl:pb-[40px] 2xl:px-[8rem]">
       <div className="!max-h-screen">
         <div className="pt-2 pb-0 flex justify-between flex-col border-b">
           <div className="w-full flex items-center justify-between">
@@ -171,7 +171,7 @@ export default function PropertiesNewPage() {
                 <TabsList className="text-foreground h-auto gap-2 rounded-none bg-transparent px-0 py-1 w-full">
                   <TabsTrigger
                     value="tab-1"
-                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-lg data-[state=active]:font-bold"
+                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-base data-[state=active]:font-bold"
                   >
                     <FaBuilding
                       className="-ms-0.5 me-1.5"
@@ -182,7 +182,7 @@ export default function PropertiesNewPage() {
                   </TabsTrigger>
                   <TabsTrigger
                     value="tab-2"
-                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-lg data-[state=active]:font-bold"
+                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-base data-[state=active]:font-bold"
                   >
                     <FaLocationArrow
                       className="-ms-0.5 me-1.5"
@@ -197,7 +197,7 @@ export default function PropertiesNewPage() {
             </Tabs>
           </div>
         </div>
-        <div className="bg-[#F7F8FA] w-full h-full p-4">
+        <div className="bg-[#F7F8FA] w-full h-full p-0">
           {tabValue === "tab-1" && (
             <InfoForm infoData={infoData} setInfoData={setInfoData} />
           )}

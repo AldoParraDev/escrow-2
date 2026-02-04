@@ -18,7 +18,7 @@ export default function PropertyCard({
 }: Props) {
   return (
     <div
-      className="w-full border rounded-3xl bg-white p-4 flex flex-col gap-4 relative shadow-[24px_20px_135px_-31px_rgba(37,51,131,0.30)]"
+      className="w-full border rounded-xl bg-white p-4 flex flex-col gap-4 relative shadow-[24px_20px_35px_-31px_rgba(37,51,131,0.10)]"
       onClick={() => handlePropertySelected(property)}
     >
       <div className="w-full flex items-start justify-between">

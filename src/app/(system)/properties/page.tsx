@@ -20,7 +20,7 @@ export default async function PropertiesPage() {
   }
 
   return (
-    <div className="bg-[#F7F8FA] px-3 flex flex-col gap-4 pt-[30px] pb-[90px] sm:px-8 xl:pb-[40px] 2xl:px-[8rem]">
+    <div className="bg-[#F7F8FA] px-3 flex flex-col gap-4 pt-[20px] pb-[90px] sm:px-8 xl:pb-[40px] 2xl:px-[8rem]">
       <div className="flex flex-col gap-2">
         <h1 className="font-bold text-primary text-[1.75rem] leading-[1] xl:text-4xl 2xl:text-5xl">
           Properties

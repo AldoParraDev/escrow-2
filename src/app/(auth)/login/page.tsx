@@ -5,7 +5,7 @@ import bg_login from "@/assets/placeholder.svg";
 export default function LoginPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2 bg-[#F7F8FA]">
-      <div className="flex flex-col gap-4 p-6 md:p-10">
+      <div className="flex flex-col gap-4 py-6 px-12 md:p-10">
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-sm">
             <LoginForm />
@@ -24,3 +24,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

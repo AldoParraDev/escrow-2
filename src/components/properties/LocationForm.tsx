@@ -26,10 +26,10 @@ export default function LocationForm({ locationData, setLocationData }: Props) {
     });
   };
   return (
-    <ScrollArea className="h-[calc(100vh-270px)] w-full">
+    <ScrollArea className="h-[calc(100vh-210px)] w-full">
       <div className="grid grid-cols-1 gap-4 w-full">
         {/* BASIC INFORMATION */}
-        <div className="w-full rounded-xl bg-white p-5 flex flex-col gap-4 border">
+        <div className="w-full rounded-b-xl bg-white p-5 flex flex-col gap-4 border border-t-0">
           <h2 className="flex items-center gap-2 text-primary font-bold text-lg">
             <FaLocationArrow className="size-5" />
             Property Address

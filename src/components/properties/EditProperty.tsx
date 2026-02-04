@@ -143,7 +143,7 @@ export default function EditProperty({ data, openEdit, setOpenEdit }: Props) {
                 <TabsList className="text-foreground h-auto gap-2 rounded-none bg-transparent px-0 py-1 w-full">
                   <TabsTrigger
                     value="tab-1"
-                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-lg data-[state=active]:font-bold"
+                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-base data-[state=active]:font-bold"
                   >
                     <FaBuilding
                       className="-ms-0.5 me-1.5"
@@ -154,7 +154,7 @@ export default function EditProperty({ data, openEdit, setOpenEdit }: Props) {
                   </TabsTrigger>
                   <TabsTrigger
                     value="tab-2"
-                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-lg data-[state=active]:font-bold"
+                    className="hover:bg-accent text-content hover:text-foreground data-[state=active]:after:bg-primary data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none text-base data-[state=active]:font-bold"
                   >
                     <FaLocationArrow
                       className="-ms-0.5 me-1.5"

@@ -352,7 +352,7 @@ export default function NewContract({ onLoading }: Props) {
       setLoadingCreate(false);
       onLoading();
 
-      router.push("/contracts");
+      // router.push("/contracts");
     } else {
       toast.error("Error creating contract", {
         position: "top-right",
@@ -430,8 +430,8 @@ export default function NewContract({ onLoading }: Props) {
           </Stepper>
         </div>
 
-        <div className="bg-[#F7F8FA] w-full h-full p-4">
-          <div className="mb-2 flex items-center gap-3">
+        <div className="bg-[#F7F8FA] w-full h-full pt-4">
+          {/* <div className="mb-2 flex items-center gap-3">
             <p className="font-medium leading-[1] text-primary text-sm">
               Step {currentStep} of 4
             </p>
@@ -441,7 +441,7 @@ export default function NewContract({ onLoading }: Props) {
               {currentStep === 3 && "Monthly Terms"}
               {currentStep === 4 && "Additional Terms"}
             </span>
-          </div>
+          </div> */}
           {currentStep === 1 && <LeaseDetailsForm />}
           {currentStep === 2 && <AmountsDueForm />}
           {currentStep === 3 && <MonthlyTermsForm />}

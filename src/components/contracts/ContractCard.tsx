@@ -40,7 +40,7 @@ export default function ContractCard({
   }, []);
   return (
     <div
-      className="w-full border rounded-3xl bg-white px-2 !py-4 flex flex-col gap-3 relative shadow-[24px_20px_135px_-31px_rgba(37,51,131,0.30)]"
+      className="w-full border rounded-xl bg-white px-2 !py-4 flex flex-col gap-3 relative shadow-[24px_20px_135px_-31px_rgba(37,51,131,0.30)]"
       onClick={() => handleContractSelected(contract)}
     >
       <div className="w-full flex items-start justify-between px-2">

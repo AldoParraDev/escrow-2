@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function RegisterPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2 bg-[#F7F8FA]">
-      <div className="flex flex-col gap-4 p-6 md:p-10">
+      <div className="flex flex-col gap-4 py-6 px-8 md:p-10">
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full">
             <RegisterForm />

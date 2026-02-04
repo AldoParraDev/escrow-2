@@ -123,13 +123,13 @@ export default function ProfileData() {
     }
   };
 
-  if (!userLoggedIn) {
-    return (
-      <div className="flex items-center justify-center">
-        <p>Loading Information...</p>
-      </div>
-    );
-  }
+  // if (!userLoggedIn) {
+  //   return (
+  //     <div className="flex items-center justify-center">
+  //       <p>Loading Information...</p>
+  //     </div>
+  //   );
+  // }
   return (
     <>
       <div className="flex flex-col gap-2">

@@ -12,15 +12,22 @@ export default function ContractsData() {
   const { userLoggedIn } = useAuthStore();
   const [listContracts, setListContracts] = useState<Contract[]>([]);
 
+  let url: string = "";
+
+  if (userLoggedIn?.user_role === "broker") {
+    url = "lease_contracts_by_brokers";
+  } else if (userLoggedIn?.user_role === "tenant") {
+    url = "lease_contracts_by_tenant";
+  } else if (userLoggedIn?.user_role === "landlord") {
+    url = "lease_contracts_by_landlord";
+  }
+
   const getContracts = async () => {
-    const response = await api.get(
-      `/lease_contracts_by_brokers/${userLoggedIn?.user_id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await api.get(`/${url}/${userLoggedIn?.user_id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     setListContracts(response.data);
   };
@@ -43,11 +50,11 @@ export default function ContractsData() {
         </span>
       </div>
 
-      <ContractsList contracts={listContracts} />
+      <ContractsList contracts={listContracts} onLoading={getContracts} />
 
       <Link
         href="/contracts/new"
-        className="bg-primary text-white fixed right-4 bottom-[90px] rounded-full py-2 !px-6 w-auto shadow-[0px_0px_35px_5px_rgba(37,51,131,0.50)] border-none text-base flex items-center gap-2"
+        className="bg-primary text-white fixed right-4 bottom-[80px] rounded-full py-2 !px-6 w-auto shadow-[0px_0px_5px_5px_rgba(37,51,131,0.10)] border-none text-base flex items-center gap-2"
       >
         <FaPlus />
         New Contract
