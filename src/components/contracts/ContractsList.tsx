@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Building2Icon,
   CalendarIcon,
@@ -68,6 +68,61 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
   );
   const [openContractDetails, setOpenContractDetails] =
     useState<boolean>(false);
+
+  const [paymentReferenceInput, setPaymentReferenceInput] = useState("");
+  const [isLoadingReference, setIsLoadingReference] = useState(false);
+  const [isSavingReference, setIsSavingReference] = useState(false);
+
+  const isPaymentStatus =
+    contractSelected?.lease_status?.toLowerCase() === "payment";
+
+  const fetchPaymentReference = useCallback(
+    async (leaseId: number, fallback: string) => {
+      setIsLoadingReference(true);
+      try {
+        const { data } = await api.get<{
+          lease_payment_reference: string | null;
+        }>(`/get_reference/${leaseId}`);
+        setPaymentReferenceInput(data.lease_payment_reference ?? "");
+      } catch {
+        setPaymentReferenceInput(fallback);
+      } finally {
+        setIsLoadingReference(false);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (openContractDetails && contractSelected && isPaymentStatus) {
+      const fallback = contractSelected.lease_payment_reference ?? "";
+      setPaymentReferenceInput(fallback);
+      fetchPaymentReference(contractSelected.lease_id, fallback);
+    }
+  }, [
+    openContractDetails,
+    contractSelected?.lease_id,
+    contractSelected?.lease_payment_reference,
+    isPaymentStatus,
+    fetchPaymentReference,
+  ]);
+
+  const handleSavePaymentReference = async () => {
+    if (!contractSelected?.lease_id) return;
+    setIsSavingReference(true);
+    try {
+      await api.put(
+        `/update_reference/${contractSelected.lease_id}?reference=${encodeURIComponent(paymentReferenceInput.trim())}`
+      );
+      setContractSelected((prev) =>
+        prev
+          ? { ...prev, lease_payment_reference: paymentReferenceInput.trim() }
+          : null
+      );
+    } finally {
+      setIsSavingReference(false);
+    }
+  };
 
   const handleContractSelected = (contract: Contract) => {
     setContractSelected(contract);
@@ -206,13 +261,49 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
               Contract #{contractSelected?.lease_id}
             </h2>
 
+            {isPaymentStatus && (
+              <div className="w-full p-4 border rounded-xl flex flex-col gap-3 bg-primary/5 border-primary/20">
+                <h3 className="flex items-center gap-2 text-lg font-medium text-primary">
+                  <FaMoneyBill className="size-5" />
+                  Payment Reference
+                </h3>
+                <p className="text-content text-sm">
+                  Reference Code
+                </p>
+                {isLoadingReference ? (
+                  <span className="text-content text-sm">Loading...</span>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <Input
+                      placeholder="e.g. ABC 123"
+                      value={paymentReferenceInput}
+                      onChange={(e) =>
+                        setPaymentReferenceInput(e.target.value)
+                      }
+                      className="w-full"
+                    />
+                    <Button
+                      onClick={handleSavePaymentReference}
+                      disabled={isSavingReference}
+                      className="w-full sm:w-auto"
+                    >
+                      {isSavingReference ? "Saving..." : "Save reference"}
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="w-full p-4 flex flex-col items-start gap-3 bg-white border rounded-xl">
               <h3
                 className={cn(
                   "flex items-center gap-2 text-lg font-medium",
                   contractSelected?.lease_status === "Ready"
                     ? "text-green-500"
-                    : "text-orange-500"
+                    : contractSelected?.lease_status?.toLowerCase() ===
+                        "payment"
+                      ? "text-primary"
+                      : "text-orange-500"
                 )}
               >
                 <FaFlag className="size-5" />
@@ -224,7 +315,10 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
                   "w-full px-4 py-2 border rounded-xl flex items-center justify-start gap-4",
                   contractSelected?.lease_status === "Ready"
                     ? "bg-green-100"
-                    : "bg-orange-100"
+                    : contractSelected?.lease_status?.toLowerCase() ===
+                        "payment"
+                      ? "bg-primary/10"
+                      : "bg-orange-100"
                 )}
               >
                 <FaCircleCheck
@@ -232,7 +326,10 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
                     "size-5",
                     contractSelected?.lease_status === "Ready"
                       ? "text-green-500"
-                      : "text-orange-500"
+                      : contractSelected?.lease_status?.toLowerCase() ===
+                          "payment"
+                        ? "text-primary"
+                        : "text-orange-500"
                   )}
                 />
                 <div className="flex flex-col gap-0 leading-[1]">
@@ -242,7 +339,10 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
                       "text-base",
                       contractSelected?.lease_status === "Ready"
                         ? "text-green-500"
-                        : "text-orange-500"
+                        : contractSelected?.lease_status?.toLowerCase() ===
+                            "payment"
+                          ? "text-primary"
+                          : "text-orange-500"
                     )}
                   >
                     {contractSelected?.lease_status}
@@ -261,7 +361,9 @@ export function ContractsList({ contracts, onLoading }: ContractsListProps) {
                     Status Description
                   </span>
                   <span className={cn("text-base")}>
-                    {contractSelected?.lease_status}
+                    {isPaymentStatus
+                      ? "Waiting for deposit payment"
+                      : contractSelected?.lease_status}
                   </span>
                 </div>
               </div>

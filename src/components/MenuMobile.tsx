@@ -3,11 +3,14 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBuilding, FaFileAlt, FaHome, FaPhoneAlt } from "react-icons/fa";
+import { FaBuilding, FaFileAlt, FaHome, FaPhoneAlt, FaUniversity } from "react-icons/fa";
 import { HiCurrencyDollar } from "react-icons/hi2";
+import { useAuthStore } from "@/store/auth.store";
 
 export default function MenuMobile() {
   const path = usePathname();
+  const { userLoggedIn } = useAuthStore();
+  const isAdmin = userLoggedIn?.user_role === "admin";
 
   return (
     <div className="bg-white border-t flex items-center justify-around fixed bottom-0 w-screen pt-3 pb-3 xl:hidden">
@@ -54,6 +57,19 @@ export default function MenuMobile() {
         <HiCurrencyDollar className="size-6" />
         <span className="text-xs font-semibold leading-[1]">Escrow</span>
       </Link>
+
+      {isAdmin && (
+        <Link
+          href="/bank"
+          className={cn(
+            "flex flex-col items-center gap-1",
+            path === "/bank" ? "text-primary" : "text-content"
+          )}
+        >
+          <FaUniversity className="size-6" />
+          <span className="text-xs font-semibold leading-[1]">Bank</span>
+        </Link>
+      )}
 
       <Link
         href="/contacts"
