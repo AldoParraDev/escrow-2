@@ -7,10 +7,12 @@ type AuthState = {
   token: string | null;
   userLoggedIn: UserData | null;
   hasHydrated: boolean;
+  bankLinked: boolean;
   setToken: (token: string) => void;
   logout: () => void;
   setHasHydrated: (state: boolean) => void;
   setUserLoggedIn: (user: UserData | null) => void;
+  setBankLinked: (value: boolean) => void;
 };
 
 // Adaptador para usar Capacitor Preferences como storage
@@ -36,11 +38,13 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       userLoggedIn: null,
       hasHydrated: false,
+      bankLinked: false,
 
       setToken: (token) => set({ token }),
-      logout: () => set({ token: null }),
+      logout: () => set({ token: null, userLoggedIn: null, bankLinked: false }),
       setHasHydrated: (state) => set({ hasHydrated: state }),
       setUserLoggedIn: (user) => set({ userLoggedIn: user }),
+      setBankLinked: (value) => set({ bankLinked: value }),
     }),
     {
       name: "auth",
